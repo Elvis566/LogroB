@@ -29,7 +29,7 @@
                 <td>{{$item->fechaVencimiento}}</td>
                 <td>{{$item->categoria}}</td>
                 <td>
-                    <form action="{{url('Compra', $item->id)}} " method="get">
+                    <form action="{{url('compra', $item->id)}} " method="get">
                         @csrf
                         <button type="submit">Comprar</button>
                     </form>
@@ -55,5 +55,6 @@
         </select> 
         <button type="submit">Filtrar</button>      
     </form>
+<a href="{{url('ventasTotal')}}">Ventas</a>
 </body>
 </html>

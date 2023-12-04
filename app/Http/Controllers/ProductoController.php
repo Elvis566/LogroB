@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\alert;
 
 class ProductoController extends Controller
 {
@@ -61,10 +64,23 @@ class ProductoController extends Controller
         }
 
     }
-    public function Comprar($id){
+    public function Comprar(Request $request, $id){
         $adquirido = Producto::find($id);
+        $venta = new Venta();
         if($adquirido){
-            
+            if($adquirido->stock < $request->cantidadCompra){
+               alert( 'No puede realizar esta compra, supero el stock de la tienda');
+               return redirect('mostrar');
+            }else{
+                // dd($request->all());
+                $adquirido->stock = $adquirido->stock - $request->cantidadCompra;
+                $adquirido->save();
+                $venta->precioTotal = $adquirido->precio * $request->cantidadCompra;
+                $venta->fecha = $request->fechac;
+                $venta->id_producto = $id;
+                $venta->save();
+                return redirect('mostrar');
+            }
         }
     }
     
