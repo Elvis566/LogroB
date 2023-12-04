@@ -30,9 +30,18 @@
                 <td>{{$item->categoria}}</td>
                 <td>
                     <form action="{{url('Compra', $item->id)}} " method="get">
+                        @csrf
                         <button type="submit">Comprar</button>
                     </form>
+                    <td>
+                        <form action="{{url('datos', $item->id)}} " method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
                 </td>
+
             </tr>
             @endforeach
         </tbody>

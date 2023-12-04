@@ -52,6 +52,15 @@ class ProductoController extends Controller
         }
         
     }
+    public function eliminar($id){
+        $producto = Producto::find($id);
+        if($producto){
+            $producto->estado = false;
+            $producto->save();
+            return back();
+        }
+
+    }
     public function Comprar($id){
         $adquirido = Producto::find($id);
         if($adquirido){

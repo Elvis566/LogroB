@@ -23,3 +23,4 @@ Route::get('/', [CategoriaController::class, 'index']);
 Route::get('/mostrar', [ProductoController::class, 'Mostrar']);
 Route::get('/compra/{id}', [ProductoController::class, 'vender']);
 Route::get('/filtrar', [ProductoController::class, 'filtrar']);
+Route::delete('/datos/{id}', [ProductoController::class, 'eliminar']);
