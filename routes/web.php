@@ -20,3 +20,6 @@ Route::get('/producto', [ProductoController::class, 'index']);
 Route::post('/guardarProducto', [ProductoController::class, 'save']);
 Route::post('/guardarCategoria', [CategoriaController::class, 'save']);
 Route::get('/', [CategoriaController::class, 'index']);
+Route::get('/mostrar', [ProductoController::class, 'Mostrar']);
+Route::get('/compra/{id}', [ProductoController::class, 'vender']);
+Route::get('/filtrar', [ProductoController::class, 'filtrar']);

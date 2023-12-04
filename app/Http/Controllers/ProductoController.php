@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -25,4 +26,37 @@ class ProductoController extends Controller
         return back();
         
     }
+    public function Mostrar(){
+        $categoria = Categoria::all();
+        $productos = DB::table('productos')
+        ->join('categorias', 'id_categoria', '=', 'categorias.id')
+        ->where('productos.estado', 1)
+        ->select('productos.*', 'categorias.categoria')
+        ->get();
+         return view('mostrar',compact('productos', 'categoria'));
+    }
+    public function filtrar(Request $request){
+        $categoria = Categoria::all();
+        $productos = DB::table('productos')
+        ->join('categorias', 'id_categoria', '=', 'categorias.id')
+        ->where('productos.estado', 1)
+        ->where('categorias.id', '=', $request->datoFiltrado)
+        ->select('productos.*', 'categorias.categoria')
+        ->get();
+         return view('mostrar',compact('productos', 'categoria'));
+    }
+    public function vender($id){
+        $producto = Producto::find($id);
+        if($producto){
+            return view('venta', compact('producto'));
+        }
+        
+    }
+    public function Comprar($id){
+        $adquirido = Producto::find($id);
+        if($adquirido){
+            
+        }
+    }
+    
 }

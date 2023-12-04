@@ -25,7 +25,7 @@
         </select>
         <button type="submit">Guardar</button>
     </form>
-
+ <a href="{{url('mostrar')}}">Compra</a>
     
 </body>
 </html>
